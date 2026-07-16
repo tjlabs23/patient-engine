@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patient Engine by Next8i — Sample Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f6f4;--surface:#ffffff;--inset:#f0f0ed;
+  --ink:#141416;--heading:#101012;--text:#3f3f45;--text-2:#6c6c74;--muted:#9a9aa2;
+  --border:#e6e6e1;--border-strong:#d7d7d1;
+  --accent:#2c6e6a;--accent-deep:#1f5450;--accent-soft:#e4efed;--accent-tint:#f0f6f5;
+  --gold:#a8823c;--sage:#6f8a6d;--slate:#3f5c78;--red:#b4453a;--green:#3f8f6a;
+  --font-head:"Poppins",system-ui,sans-serif;--font-body:"Inter",system-ui,sans-serif;
+  --r:18px;--r-sm:12px;--r-lg:24px;
+  --sh-sm:0 1px 2px rgba(20,20,26,.05),0 1px 3px rgba(20,20,26,.05);
+  --sh-md:0 4px 14px rgba(20,20,26,.06),0 2px 6px rgba(20,20,26,.04);
+  --sh-lg:0 20px 48px rgba(20,20,26,.11);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
+/* grid/flex children must be allowed to shrink below content size (prevents mobile overflow) */
+.tiles>*,.adcards>*,.concepts>*,.gloss>*,.contrast>*,.funnel>*,.metaline>*{min-width:0}
+.tile .v,.adcard li,.concept h4{overflow-wrap:break-word}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:44px 30px 70px}
+h1,h2,h3,h4{font-family:var(--font-head);color:var(--heading);line-height:1.15}
+.eyebrow{font-family:var(--font-head);text-transform:uppercase;letter-spacing:.16em;font-size:12.5px;font-weight:700;color:var(--accent)}
+strong,b{color:var(--heading);font-weight:600}
+.accent{color:var(--accent)}
+
+/* header */
+.hero{background:linear-gradient(158deg,#23514e,#173d3a);color:#eaf3f1;border-radius:var(--r-lg);padding:38px 40px;box-shadow:var(--sh-lg);position:relative;overflow:hidden}
+.hero .eyebrow{color:#9fd0c8}
+.hero h1{color:#fff;font-size:32px;font-weight:800;margin:10px 0 14px;letter-spacing:-.4px}
+.hero .sub{color:#c9e2dd;font-size:15.5px;max-width:40rem}
+.metaline{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.16);font-size:13.5px;color:#bcdad4}
+.metaline b{color:#fff}
+.brandlock{display:flex;align-items:center;gap:11px;margin-bottom:20px}
+.logomark{width:40px;height:40px;border-radius:11px;background:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 40px;box-shadow:0 2px 9px rgba(0,0,0,.18)}
+.logomark svg{width:24px;height:24px}
+.brandtext{display:flex;flex-direction:column;line-height:1.08}
+.brandtext .bn{font-family:var(--font-head);font-weight:800;color:#fff;font-size:17px;letter-spacing:-.2px}
+.brandtext .bb{font-size:11.5px;color:#9fd0c8;font-weight:600;letter-spacing:.03em}
+.samplechip{position:absolute;top:22px;right:26px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:#eaf3f1;font-family:var(--font-head);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:6px 13px;border-radius:20px}
+
+section{margin-top:40px}
+.sec-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.sec-num{width:30px;height:30px;flex:0 0 30px;background:var(--accent-soft);color:var(--accent-deep);font-family:var(--font-head);font-weight:700;font-size:15px;border-radius:9px;display:flex;align-items:center;justify-content:center}
+h2{font-size:22px;font-weight:700;color:var(--heading)}
+.lead{font-size:17px;color:var(--text);margin:8px 0}
+p{margin:10px 0;max-width:44rem}
+
+/* stat tiles */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 16px 15px;box-shadow:var(--sh-sm)}
+.tile .k{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-2);font-weight:600}
+.tile .v{font-family:var(--font-head);font-weight:700;font-size:26px;color:var(--heading);margin-top:4px;letter-spacing:-.5px}
+.tile .v small{font-size:14px;color:var(--muted);font-weight:600}
+.tile.hi{background:var(--accent-tint);border-color:#cfe4e0}
+.tile.hi .v{color:var(--accent-deep)}
+.rowlabel{font-family:var(--font-head);font-weight:600;font-size:13px;color:var(--text-2);text-transform:uppercase;letter-spacing:.1em;margin:20px 0 2px}
+
+.verdict{background:var(--accent-tint);border:1px solid #cfe4e0;border-left:4px solid var(--accent);border-radius:var(--r-sm);padding:16px 20px;margin-top:16px}
+.verdict b{color:var(--accent-deep)}
+
+/* glossary */
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:10px 26px;margin-top:6px}
+.gloss div{padding:9px 0;border-bottom:1px solid var(--border);font-size:14.5px}
+.gloss .t{font-family:var(--font-head);font-weight:600;color:var(--heading)}
+
+/* table */
+.tablewrap{overflow-x:auto;margin:14px 0;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh-sm)}
+table{border-collapse:collapse;width:100%;min-width:660px;background:var(--surface);font-size:14px}
+th,td{padding:11px 13px;text-align:right;border-bottom:1px solid var(--border)}
+th:first-child,td:first-child{text-align:left}
+thead th{background:var(--inset);font-family:var(--font-head);font-weight:600;color:var(--text-2);font-size:12px;text-transform:uppercase;letter-spacing:.05em;position:sticky;top:0}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:#fafaf8}
+td .camp{font-weight:600;color:var(--heading)}
+td .aud{display:block;color:var(--muted);font-size:12px;font-weight:500}
+.ret{font-family:var(--font-head);font-weight:700;color:var(--accent-deep)}
+.flag-leak{color:var(--red);font-weight:700}
+.flag-win{color:var(--green);font-weight:700}
+.tag{display:inline-block;font-size:11px;font-family:var(--font-head);font-weight:700;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle}
+.tag.leak{background:#f7e4e2;color:var(--red)}
+.tag.win{background:#e2efe8;color:var(--green)}
+
+/* ad cards */
+.adcards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:14px}
+.adcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;box-shadow:var(--sh-sm)}
+.adcard h4{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.dot{width:9px;height:9px;border-radius:50%;flex:0 0 9px}
+.dot.g{background:var(--green)}.dot.y{background:var(--gold)}.dot.r{background:var(--red)}
+.adcard ul{list-style:none;margin:0}
+.adcard li{font-size:13px;padding:7px 0;border-bottom:1px solid var(--border);color:var(--text)}
+.adcard li:last-child{border-bottom:none}
+.adcard li b{color:var(--heading)}
+.adcard .m{color:var(--accent-deep);font-family:var(--font-head);font-weight:700}
+
+/* contrast callout */
+.contrast{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:14px;box-shadow:var(--sh-sm)}
+.contrast>div{padding:20px 22px;background:var(--surface)}
+.contrast>div:first-child{border-right:1px solid var(--border);background:var(--accent-tint)}
+.contrast .lab{font-family:var(--font-head);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-2)}
+.contrast .big{font-family:var(--font-head);font-weight:800;font-size:30px;color:var(--heading);margin:6px 0 2px;letter-spacing:-.5px}
+.contrast .win .big{color:var(--accent-deep)}
+.contrast p{font-size:13.5px;color:var(--text-2);margin:6px 0 0}
+
+/* moves */
+.moves{counter-reset:m;margin-top:8px}
+.move{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px 16px 58px;box-shadow:var(--sh-sm);margin:11px 0;position:relative}
+.move:before{counter-increment:m;content:counter(m);position:absolute;left:16px;top:16px;width:28px;height:28px;background:var(--accent);color:#fff;font-family:var(--font-head);font-weight:700;font-size:14px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.move h4{font-size:15px;font-weight:700;margin-bottom:3px}
+.move p{font-size:14px;margin:2px 0 0;max-width:none}
+.move .num{color:var(--accent-deep);font-weight:700}
+
+.steps{margin-top:8px;padding-left:2px}
+.steps li{list-style:none;padding:9px 0 9px 30px;position:relative;font-size:15px;border-bottom:1px solid var(--border)}
+.steps li:last-child{border-bottom:none}
+.steps li:before{content:"";position:absolute;left:4px;top:15px;width:9px;height:9px;border-radius:50%;background:var(--accent)}
+
+/* bottleneck / funnel */
+.engine{background:linear-gradient(158deg,#23514e,#173d3a);color:#eaf3f1;border-radius:var(--r-lg);padding:34px 36px;box-shadow:var(--sh-lg);margin-top:16px}
+.engine .eyebrow{color:#9fd0c8}
+.engine h3{color:#fff;font-size:23px;font-weight:800;margin:8px 0 12px}
+.engine p{color:#c9e2dd;max-width:42rem;font-size:15px}
+.engine p b{color:#fff}
+.funnel{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:22px 0 4px}
+.fcol .fh{font-family:var(--font-head);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#9fd0c8;margin-bottom:10px}
+.fcol.after .fh{color:#ffe4b8}
+.bar{position:relative;height:38px;border-radius:9px;margin:8px 0;display:flex;align-items:center;padding:0 14px;font-family:var(--font-head);font-weight:700;font-size:13.5px;color:#fff;overflow:hidden}
+.bar span.n{margin-left:auto;font-weight:700}
+.bar.b1{background:rgba(159,208,200,.30)}
+.bar.b2{background:rgba(159,208,200,.42)}
+.bar.b3{background:rgba(159,208,200,.55)}
+.bar.b4{background:rgba(159,208,200,.72);color:#0e2b28}
+.after .bar.b2{background:rgba(255,196,120,.42)}
+.after .bar.b3{background:rgba(255,196,120,.6)}
+.after .bar.b4{background:rgba(255,196,120,.85);color:#3a2606}
+.lift{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:var(--r-sm);padding:14px 18px;margin-top:16px;font-size:15px;color:#eaf3f1}
+.lift b{color:#fff;font-family:var(--font-head)}
+
+/* creative concepts */
+.concepts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.concept{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;box-shadow:var(--sh-sm);border-top:3px solid var(--accent)}
+.concept h4{font-size:15px;font-weight:700;color:var(--heading);margin:8px 0 4px;line-height:1.25}
+.concept p{font-size:13px;color:var(--text-2);margin:0}
+.cwhy{display:block;margin-top:7px;color:var(--accent-deep);font-weight:600;font-size:12.5px}
+.cbadge{display:inline-block;font-family:var(--font-head);font-weight:700;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:20px}
+.cbadge.v{background:#e2efe8;color:var(--green)}
+.cbadge.r{background:#eef0f6;color:var(--slate)}
+.cbadge.s{background:#f4ecdd;color:var(--gold)}
+.note{background:var(--inset);border:1px solid var(--border);border-radius:var(--r-sm);padding:16px 20px;margin-top:16px;font-size:14px;color:var(--text-2)}
+.foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--border-strong);font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.foot b{color:var(--text-2)}
+
+@media (max-width:680px){
+  .wrap{padding:26px 16px 50px}
+  .hero{padding:26px 22px}.hero h1{font-size:25px}
+  .tiles{grid-template-columns:1fr 1fr}
+  .gloss,.adcards,.funnel,.concepts{grid-template-columns:1fr}
+  .contrast{grid-template-columns:1fr}
+  .contrast>div:first-child{border-right:none;border-bottom:1px solid var(--border)}
+  .samplechip{position:static;display:inline-block;margin-bottom:8px}
+}
+@media print{ body{background:#fff} .wrap{max-width:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="samplechip">Sample Report</span>
+  <div class="brandlock">
+    <div class="logomark"><svg viewBox="0 0 24 24" fill="none"><path d="M3 15.5l4.5-4.5 3.5 2.6 6-7.1" stroke="#2c6e6a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17.6" cy="6.2" r="2.5" fill="#2c6e6a"/></svg></div>
+    <div class="brandtext"><span class="bn">Patient Engine</span><span class="bb">by Next8i</span></div>
+  </div>
+  <div class="eyebrow">Monthly Patient-Acquisition Report</div>
+  <h1>Your New-Patient Ads — What's Working &amp; Where the Money Is</h1>
+  <div class="sub">A plain-English read on your ad spend: how many patients it brought in, where it's leaking, and the exact moves to make more from the same budget.</div>
+  <div class="metaline">
+    <span>For: <b>Summit Spine &amp; Wellness</b> <span style="opacity:.7">(illustrative practice)</span></span>
+    <span>Prepared by: <b>Patient Engine</b> · Next8i Services</span>
+    <span>Window: <b>Last 30 &amp; 90 days</b></span>
+    <span>Reviewed: <b>Facebook / Instagram lead campaigns</b></span>
+  </div>
+</header>
+
+<section>
+  <div class="sec-eyebrow"><div class="sec-num">1</div><h2>The big picture</h2></div>
+  <p class="lead">Here's what your ad dollars did — start to finish, in real terms: from the click, to the booked appointment, to the patient who actually walked in.</p>
+
+  <div class="rowlabel">Last 30 days</div>
+  <div class="tiles">
+    <div class="tile"><div class="k">Ad spend</div><div class="v">$4,180</div></div>
+    <div class="tile"><div class="k">Leads</div><div class="v">174</div></div>
+    <div class="tile"><div class="k">Booked appts</div><div class="v">96</div></div>
+    <div class="tile"><div class="k">Showed up</div><div class="v">62</div></div>
+    <div class="tile"><div class="k">New patients</div><div class="v">39</div></div>
+    <div class="tile"><div class="k">Cost / new patient</div><div class="v">$107</div></div>
+    <div class="tile"><div class="k">Patient revenue</div><div class="v">$50,700</div></div>
+    <div class="tile hi"><div class="k">Return</div><div class="v">12.1<small>x</small></div></div>
+  </div>
+
+  <div class="rowlabel">Last 90 days</div>
+  <div class="tiles">
+    <div class="tile"><div class="k">Ad spend</div><div class="v">$12,940</div></div>
+    <div class="tile"><div class="k">Leads</div><div class="v">548</div></div>
+    <div class="tile"><div class="k">Booked appts</div><div class="v">302</div></div>
+    <div class="tile"><div class="k">Showed up</div><div class="v">201</div></div>
+    <div class="tile"><div class="k">New patients</div><div class="v">128</div></div>
+    <div class="tile"><div class="k">Cost / new patient</div><div class="v">$101</div></div>
+    <div class="tile"><div class="k">Patient revenue</div><div class="v">$166,400</div></div>
+    <div class="tile hi"><div class="k">Return</div><div class="v">12.9<small>x</small></div></div>
+  </div>
+
+  <div class="verdict"><b>Verdict:</b> This is a healthy, profitable ad account — every $1 in is bringing back roughly $13 in patient revenue. The engine works. The one real leak isn't the ads at all: <b>only 55% of leads book, and only 65% of those show up.</b> That's ~$1,300 walking out the door with every no-show. Fix that and this account jumps another tier without spending a dollar more. (More on that in section 7.)</div>
+</section>
+
+<section>
+  <div class="sec-eyebrow"><div class="sec-num">2</div><h2>Quick word on the terms</h2></div>
+  <div class="gloss">
+    <div><span class="t">Lead</span> — someone who filled out the form or called from the ad.</div>
+    <div><span class="t">Cost per lead</span> — what you paid to get one to raise their hand.</div>
+    <div><span class="t">Booking rate</span> — of the leads, how many booked an appointment.</div>
+    <div><span class="t">Show rate</span> — of the booked, how many actually showed up.</div>
+    <div><span class="t">New-patient value</span> — first visit + care plan, averaged (~$1,300 here).</div>
+    <div><span class="t">Return</span> — the headline. Patient revenue ÷ ad spend. "$1 in → $X back."</div>
+  </div>
+  <p style="margin-top:14px;color:var(--text-2);font-size:14.5px">Watch the gap between <b>cheap leads</b> and <b>low show-rate</b>: it means people are interested but not making it in the door. That's a follow-up problem, not an ad problem.</p>
+</section>
+
+<section>
+  <div class="sec-eyebrow"><div class="sec-num">3</div><h2>Top campaigns (90 days)</h2></div>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Campaign · Audience</th><th>Spend</th><th>Leads</th><th>Booked</th><th>Cost/Booked</th><th>Show</th><th>New Pts</th><th>Return</th></tr></thead>
+    <tbody>
+      <tr><td><span class="camp">$29 New-Patient Special</span><span class="aud">Back pain · cold</span></td><td>$3,980</td><td>201</td><td>108</td><td>$37</td><td>63%</td><td>44</td><td class="ret">14.4x</td></tr>
+      <tr><td><span class="camp">Sciatica Relief — Free Consult</span><span class="aud">Sciatica · cold</span> <span class="tag leak">Leak</span></td><td>$2,760</td><td>168</td><td>71</td><td>$39</td><td class="flag-leak">56%</td><td>27</td><td class="ret">12.7x</td></tr>
+      <tr><td><span class="camp">Auto-Injury / Whiplash</span><span class="aud">Recent accident (PI) · cold</span> <span class="tag win">Starved winner</span></td><td>$2,410</td><td>44</td><td>31</td><td>$78</td><td>74%</td><td>22</td><td class="ret">21.2x</td></tr>
+      <tr><td><span class="camp">Spinal Decompression</span><span class="aud">Disc / herniation</span></td><td>$1,880</td><td>39</td><td>22</td><td>$85</td><td>68%</td><td>14</td><td class="ret">12.1x</td></tr>
+      <tr><td><span class="camp">Headache &amp; Migraine Relief</span><span class="aud">Cold</span></td><td>$1,090</td><td>51</td><td>24</td><td>$45</td><td class="flag-leak">54%</td><td>11</td><td class="ret">11.4x</td></tr>
+      <tr><td><span class="camp">Retargeting — Warm</span><span class="aud">Prior leads &amp; site visitors</span> <span class="tag win">Feed it</span></td><td>$820</td><td>40</td><td>30</td><td>$27</td><td>80%</td><td>18</td><td class="ret">26.3x</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><b class="flag-leak">The leak:</b> Sciatica pulls the 2nd-most leads at a great $16 cost-per-lead — but only <b>56% show</b>. Those are cheap, high-intent leads you're paying for and then losing at the front desk. <b class="flag-win">The starved winner:</b> Auto-Injury (PI) returns <b>21.2x</b> with a 74% show-rate and only got $2,410 — these are your highest-value cases and the campaign is underfunded.</p>
+</section>
+
+<section>
+  <div class="sec-eyebrow"><div class="sec-num">4</div><h2>Best &amp; worst individual ads</h2></div>
+  <div class="adcards">
+    <div class="adcard">
+      <h4><span class="dot g"></span>Scale — proven bookers</h4>
+      <ul>
+        <li>"Still waking up with back pain?" <span class="aud" style="color:var(--muted)">patient video</span><br><b class="m">15.1x</b> · $1,840 · 71 booked</li>
+        <li>"That sharp pain down your leg — here's what's really happening" <br><b class="m">13.9x</b> · $1,410 · 38 booked</li>
+        <li>"$29 gets your exam, X-rays &amp; first adjustment"<br><b class="m">12.8x</b> · $1,290</li>
+      </ul>
+    </div>
+    <div class="adcard">
+      <h4><span class="dot y"></span>Hidden gems — feed these</h4>
+      <ul>
+        <li>"Were you in a car accident in the last 30 days?"<br><b class="m">24x</b> · only $210 · $35/booked</li>
+        <li>"The 20-second test for a pinched nerve"<br><b class="m">19x</b> · $180 · educational Reel</li>
+        <li>"Meet Sharon — 3 weeks out of pain"<br><b class="m">17x</b> · $240 · patient story</li>
+      </ul>
+    </div>
+    <div class="adcard">
+      <h4><span class="dot r"></span>Turn off — leads that don't book/show</h4>
+      <ul>
+        <li>"We take most insurance!"<br><b class="m" style="color:var(--red)">3.1x</b> · $320 · 41% show</li>
+        <li>"Now accepting new patients"<br><b class="m" style="color:var(--red)">2.4x</b> · $180 · vague</li>
+        <li>Zero-booking long tail: "Wellness starts here," "Your health matters," "Book today" — <b>~$220 doing nothing</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-eyebrow"><div class="sec-num">5</div><h2>Same offer, two very different ads</h2></div>
+  <p>Both are the sciatica offer, same landing page:</p>
+  <div class="contrast">
+    <div class="win">
+      <div class="lab">Patient video (UGC)</div>
+      <div class="big">13.9x</div>
+      <div class="lab" style="color:var(--accent-deep)">$1,410 spend · $39 / booked</div>
+      <p>"That sharp pain down your leg…" A real patient telling their story. Books cheap, shows up.</p>
+    </div>
+    <div>
+      <div class="lab">Clinic graphic</div>
+      <div class="big">6.2x</div>
+      <div class="lab" style="color:var(--text-2)">$1,190 spend · $71 / booked</div>
+      <p>"Sciatica Treatment Available." Nearly the same spend, half the bookings. Move the budget to the video.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-eyebrow"><div class="sec-num">6</div><h2>Creative report card — and what to make next</h2></div>
+  <p class="lead">The single biggest driver of cheaper patients isn't the audience — it's the creative. Here's what your ads are telling us, and the exact new pieces to shoot.</p>
+
+  <div class="contrast" style="margin-top:16px">
+    <div class="win">
+      <div class="lab" style="color:var(--accent-deep)">✓ What's winning</div>
+      <ul style="list-style:none;margin:12px 0 0">
+        <li style="padding:8px 0;border-bottom:1px solid #cfe4e0;font-size:14px"><b>Real patient stories (UGC video).</b> A person in your chair beats a polished clinic ad every time — it's trust, not production.</li>
+        <li style="padding:8px 0;border-bottom:1px solid #cfe4e0;font-size:14px"><b>Hyper-specific pain hooks.</b> "That sharp pain down your leg" outperforms "back &amp; neck care" — name the exact symptom and the right person self-selects.</li>
+        <li style="padding:8px 0;font-size:14px"><b>Pattern-interrupt openers.</b> "Were you in a car accident in the last 30 days?" stops the scroll because it's a yes/no question aimed at one person.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="lab" style="color:var(--red)">✕ What's flopping</div>
+      <ul style="list-style:none;margin:12px 0 0">
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);font-size:14px"><b>Generic clinic graphics.</b> Logo + stock spine + "Sciatica Treatment Available" reads like an ad, so people scroll past it.</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);font-size:14px"><b>Vague CTAs.</b> "Book today," "Your health matters," "Now accepting patients" — no symptom, no reason, no urgency.</li>
+        <li style="padding:8px 0;font-size:14px"><b>Insurance-led hooks.</b> "We take most insurance" attracts price-shoppers who don't show — the worst-quality lead on the account.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rowlabel" style="margin-top:26px">Make these next — 5 concepts, prioritized</div>
+  <div class="concepts">
+    <div class="concept"><span class="cbadge v">UGC Video</span><h4>"I canceled my back surgery after 3 visits."</h4><p>Real patient, phone-shot. Opens on the sentence, then the story. Target: chronic back pain &amp; disc. <span class="cwhy">Why: story + specific outcome = the highest-trust format you have.</span></p></div>
+    <div class="concept"><span class="cbadge r">Reel</span><h4>"The 20-second test to check for a pinched nerve."</h4><p>Doctor demos a quick self-test. Educational, save-worthy, ends on "if that hurt, come see us." <span class="cwhy">Why: teaches first, sells second — earns the click and the save.</span></p></div>
+    <div class="concept"><span class="cbadge v">UGC Video</span><h4>"Rear-ended last week? Do this before you feel fine."</h4><p>Urgency + education for auto-injury (your 21x campaign). <span class="cwhy">Why: PI is your highest-value patient — feed the winner with more of what works.</span></p></div>
+    <div class="concept"><span class="cbadge r">Reel</span><h4>"3 sleep positions making your neck pain worse."</h4><p>Fast, visual, list-style. Broad top-of-funnel reach that still qualifies. <span class="cwhy">Why: problem-aware hook pulls people who don't know they need you yet.</span></p></div>
+    <div class="concept"><span class="cbadge s">Static / Offer</span><h4>"$29 — Exam, X-rays &amp; your first adjustment."</h4><p>Clean offer card, no clutter, one clear button. <span class="cwhy">Why: your proven offer works — it just needs a crisp, specific execution, not a generic graphic.</span></p></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-eyebrow"><div class="sec-num">7</div><h2 class="accent">The bottleneck — where the biggest money is</h2></div>
+  <div class="engine">
+    <div class="eyebrow">The pattern worth more than any ad tweak</div>
+    <h3>Your leads are cheap. You're losing them after the click.</h3>
+    <p>Over 90 days you paid for <b>548 leads at ~$24 each</b> — that part is working. But only <b>55% booked</b>, and of those only <b>65% showed</b>. So for every 100 people who raised their hand, about <b>36 actually walked in</b>. The ads aren't the problem. <b>The follow-up is.</b></p>
+    <div class="funnel">
+      <div class="fcol">
+        <div class="fh">Today — manual front desk</div>
+        <div class="bar b1">Leads <span class="n">548</span></div>
+        <div class="bar b2">Booked (55%) <span class="n">302</span></div>
+        <div class="bar b3">Showed (65%) <span class="n">201</span></div>
+        <div class="bar b4">New patients <span class="n">128</span></div>
+      </div>
+      <div class="fcol after">
+        <div class="fh">With Patient Engine</div>
+        <div class="bar b1">Leads <span class="n">548</span></div>
+        <div class="bar b2">Booked (72%) <span class="n">394</span></div>
+        <div class="bar b3">Showed (82%) <span class="n">323</span></div>
+        <div class="bar b4">New patients <span class="n">188</span></div>
+      </div>
+    </div>
+    <p style="font-size:13.5px;color:#9fd0c8">Same 548 leads. Same ad spend. Patient Engine texts every new lead back in under 60 seconds, books them into an open slot, and runs a reminder sequence (text + call) right up to the visit — so fewer slip away and fewer no-show.</p>
+    <div class="lift"><b>The result:</b> ~<b>60 more new patients a quarter</b> from the leads you're <em>already paying for</em> — about <b>$78,000</b> in patient revenue. You don't need more leads. You need to stop losing the ones you've got.</div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-eyebrow"><div class="sec-num">8</div><h2>★ Specific moves this week</h2></div>
+  <div class="moves">
+    <div class="move"><h4>Fund the Auto-Injury campaign.</h4><p>21.2x return, 74% show, highest-value cases — and only <span class="num">$2,410</span> behind it. Double it to <span class="num">~$5,000</span>. This is your best return-with-room.</p></div>
+    <div class="move"><h4>Feed the hidden gems.</h4><p>Move "Were you in a car accident…" (<span class="num">24x</span>) and "20-second pinched-nerve test" (<span class="num">19x</span>) to real <span class="num">$300–400</span> budgets and watch if the return holds at volume.</p></div>
+    <div class="move"><h4>Turn on Patient Engine for the low-show campaigns.</h4><p>Sciatica (56% show) and Headache (54% show) are leaking booked patients. Instant text-back + reminders is the single highest-dollar fix on this page.</p></div>
+    <div class="move"><h4>Shift the budget.</h4><p>Pull <span class="num">~$1,000</span> off Headache (11.4x) and kill the generic ads (<span class="num">~$500</span>). Move it onto Back-Pain Special (14.4x) and Auto-Injury (21.2x).</p></div>
+    <div class="move"><h4>Turn off the tire-kickers.</h4><p>"We take most insurance," "Now accepting new patients," and the zero-booking long tail — <span class="num">~$720</span> of spend producing near-nothing.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-eyebrow"><div class="sec-num">9</div><h2>What to do (in order)</h2></div>
+  <ul class="steps">
+    <li>Kill the generic and zero-booking ads today — stop the bleed first.</li>
+    <li>Double the Auto-Injury budget and fund the two hidden gems.</li>
+    <li>Switch on Patient Engine for the Sciatica &amp; Headache leads (the low-show campaigns).</li>
+    <li>Shift the Headache budget onto the Back-Pain Special and Auto-Injury.</li>
+    <li>Re-read next month — the show-rate line is the one to watch.</li>
+  </ul>
+</section>
+
+<div class="note"><b style="color:var(--text-2)">One honest note.</b> This is an illustrative sample built from typical chiropractic lead-gen campaigns — not any one practice's real numbers. Your actual figures will move with your market, offer, and season. The point isn't the exact numbers; it's that the system reads your live ad data and tells you, in plain English, <b>exactly where the money is and what to do next.</b></div>
+
+<div class="foot">
+  <span>Prepared from live Facebook &amp; Instagram Ads data · Read-only — we recommend, you approve every change.</span>
+  <span><b>Patient Engine</b> by Next8i · new-patient generation + appointment setting for chiropractic</span>
+</div>
+
+</div>
+</body>
+</html>
